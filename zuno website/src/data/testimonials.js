@@ -1,0 +1,42 @@
+export const testimonials = [
+  {
+    id: 1,
+    name: "Priya Singh",
+    role: "Daily Commuter",
+    image: "https://i.pravatar.cc/150?img=1",
+    text: "ZUNO saved me 2 hours every day! No more traffic stress. ⚡",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "Rahul Patel",
+    role: "Student",
+    image: "https://i.pravatar.cc/150?img=2",
+    text: "Most affordable way to get around the city. Love it! 💚",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Ananya Verma",
+    role: "Freelancer",
+    image: "https://i.pravatar.cc/150?img=3",
+    text: "Perfect for my first-mile, last-mile mobility needs.",
+    rating: 4.5,
+  },
+  {
+    id: 4,
+    name: "Arjun Kumar",
+    role: "IT Professional",
+    image: "https://i.pravatar.cc/150?img=4",
+    text: "The app is super smooth and bikes are always available!",
+    rating: 5,
+  },
+  {
+    id: 5,
+    name: "Neha Gupta",
+    role: "Business Owner",
+    image: "https://i.pravatar.cc/150?img=5",
+    text: "Game changer for last-mile connectivity. Highly recommended.",
+    rating: 5,
+  },
+];

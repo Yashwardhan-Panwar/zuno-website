@@ -1,0 +1,58 @@
+export const bikes = [
+  {
+    id: 1,
+    name: "Urban Cruiser Pro",
+    price: "$1,299",
+    range: "60 miles",
+    motor: "500W",
+    battery: "48V, 10Ah",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    category: "city",
+    weight: "28 lbs",
+    topSpeed: "28 mph",
+    charge: "4 hours",
+    description: "Perfect for city commuting with integrated lights and fenders."
+  },
+  {
+    id: 2,
+    name: "Mountain Beast X",
+    price: "$1,899",
+    range: "50 miles",
+    motor: "750W",
+    battery: "48V, 14Ah",
+    image: "https://images.unsplash.com/photo-1571188733066-c09fc87648d5?w=400&h=400&fit=crop",
+    category: "mountain",
+    weight: "32 lbs",
+    topSpeed: "32 mph",
+    charge: "5 hours",
+    description: "Aggressive off-road capability with dual suspension."
+  },
+  {
+    id: 3,
+    name: "Speed Demon S1",
+    price: "$2,499",
+    range: "80 miles",
+    motor: "1000W",
+    battery: "52V, 20Ah",
+    image: "https://images.unsplash.com/photo-1445741902377-2971284521fd?w=400&h=400&fit=crop",
+    category: "performance",
+    weight: "35 lbs",
+    topSpeed: "45 mph",
+    charge: "6 hours",
+    description: "Lightning-fast performance for speed enthusiasts."
+  },
+  {
+    id: 4,
+    name: "Budget Buddy",
+    price: "$599",
+    range: "35 miles",
+    motor: "250W",
+    battery: "36V, 8Ah",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    category: "budget",
+    weight: "24 lbs",
+    topSpeed: "20 mph",
+    charge: "3 hours",
+    description: "Affordable entry point to electric biking."
+  },
+];
