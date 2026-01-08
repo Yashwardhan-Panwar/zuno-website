@@ -1,79 +1,116 @@
 import React from 'react';
-import { bikeTypes } from '../data/stations';
 
 export default function BikeFleet() {
+  const bikeTypes = [
+    {
+      id: 1,
+      name: "Standard City Bike",
+      emoji: "🚲",
+      color: "Blue",
+      range: "45 km",
+      speed: "25 km/h",
+      weight: "24 kg",
+      battery: "36V, 10Ah",
+      description: "Perfect for casual city rides and commuting",
+    },
+    {
+      id: 2,
+      name: "Premium Electric Bike",
+      emoji: "🚴",
+      color: "Black",
+      range: "70 km",
+      speed: "32 km/h",
+      weight: "28 kg",
+      battery: "48V, 14Ah",
+      description: "More power for longer distances and steep climbs",
+    },
+    {
+      id: 3,
+      name: "Mountain E-Bike",
+      emoji: "🏔️",
+      color: "Red",
+      range: "60 km",
+      speed: "35 km/h",
+      weight: "32 kg",
+      battery: "48V, 16Ah",
+      description: "Built for adventure and off-road trails",
+    },
+  ];
+
   return (
     <section className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-5xl md:text-6xl font-bold text-center mb-4">Our Fleet</h2>
-        <p className="text-center text-gray-600 text-xl mb-16">Choose from 3 amazing bike types</p>
-        
+        <h2 className="text-5xl font-bold text-center mb-4">Our Fleet</h2>
+        <p className="text-center text-gray-600 text-xl mb-16 max-w-3xl mx-auto">
+          Coming Soon! We're sourcing premium e-bikes from our partners in China. 
+          These bikes will be available at ZUNO stations across the city.
+        </p>
+
         <div className="grid md:grid-cols-3 gap-8">
           {bikeTypes.map((bike) => (
             <div
               key={bike.id}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:scale-105 relative"
             >
+              {/* Coming Soon Badge */}
+              <div className="absolute top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                Coming Soon
+              </div>
+
               {/* Bike Image/Emoji */}
-              <div className="bg-gradient-to-br from-blue-100 to-cyan-100 p-8 text-center">
-                <div className="text-9xl mb-4 transform group-hover:scale-110 transition duration-300">
-                  {bike.emoji}
-                </div>
+              <div className="bg-gradient-to-br from-blue-100 to-cyan-100 p-12 text-center">
+                <div className="text-9xl mb-4">{bike.emoji}</div>
               </div>
 
               {/* Content */}
               <div className="p-8">
                 <h3 className="text-2xl font-bold mb-2 text-slate-900">{bike.name}</h3>
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-blue-600 font-bold text-lg">{bike.count} available</span>
-                  <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
-                    {bike.color}
-                  </span>
-                </div>
+                <p className="text-gray-600 mb-6">{bike.description}</p>
 
                 {/* Specs Grid */}
-                <div className="space-y-3 mb-8">
-                  <div className="flex justify-between items-center border-b pb-2">
-                    <span className="text-gray-600">Range:</span>
-                    <span className="font-bold text-slate-900">{bike.range}</span>
+                <div className="space-y-3 mb-8 bg-slate-50 p-6 rounded-lg">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600 font-semibold">Range:</span>
+                    <span className="text-slate-900">{bike.range}</span>
                   </div>
-                  <div className="flex justify-between items-center border-b pb-2">
-                    <span className="text-gray-600">Max Speed:</span>
-                    <span className="font-bold text-slate-900">{bike.speed}</span>
+                  <div className="flex justify-between border-t pt-3">
+                    <span className="text-gray-600 font-semibold">Max Speed:</span>
+                    <span className="text-slate-900">{bike.speed}</span>
                   </div>
-                  <div className="flex justify-between items-center border-b pb-2">
-                    <span className="text-gray-600">Battery:</span>
-                    <span className="font-bold text-slate-900">{bike.battery}</span>
+                  <div className="flex justify-between border-t pt-3">
+                    <span className="text-gray-600 font-semibold">Battery:</span>
+                    <span className="text-slate-900">{bike.battery}</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Weight:</span>
-                    <span className="font-bold text-slate-900">{bike.weight}</span>
+                  <div className="flex justify-between border-t pt-3">
+                    <span className="text-gray-600 font-semibold">Weight:</span>
+                    <span className="text-slate-900">{bike.weight}</span>
                   </div>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-3 rounded-lg font-bold transition transform hover:scale-105">
-                  🚴 Reserve Now
-                </button>
+                <p className="text-center text-gray-600 italic">
+                  🎯 Launching Q2 2026
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-xl text-gray-600 mb-6">All bikes include:</p>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { icon: "🔒", text: "Smart Lock" },
-              { icon: "📍", text: "GPS Tracking" },
-              { icon: "🔋", text: "Auto-Charge" },
-              { icon: "🛡️", text: "Insurance" },
-            ].map((feature, i) => (
-              <div key={i} className="text-center">
-                <div className="text-4xl mb-2">{feature.icon}</div>
-                <p className="font-semibold text-gray-700">{feature.text}</p>
-              </div>
-            ))}
+        {/* Info Box */}
+        <div className="mt-16 bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-xl p-12">
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">📦 Fleet Details</h3>
+          <div className="grid md:grid-cols-3 gap-8 text-gray-700">
+            <div>
+              <p className="font-bold text-lg mb-2">🔋 Smart Battery</p>
+              <p>Auto-charge at stations. No manual charging needed.</p>
+            </div>
+            <div>
+              <p className="font-bold text-lg mb-2">🔒 Security</p>
+              <p>GPS tracking + Smart locks. Your ride is always safe.</p>
+            </div>
+            <div>
+              <p className="font-bold text-lg mb-2">🛠️ Maintenance</p>
+              <p>ZUNO maintains all bikes. You just ride and return.</p>
+            </div>
           </div>
         </div>
       </div>

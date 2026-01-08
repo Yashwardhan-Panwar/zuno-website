@@ -1,71 +1,90 @@
 import React, { useState } from 'react';
-import ProductCard from '../components/ProductCard';
-import { bikes } from '../data/bikes';
+import BikeTypeCard from '../components/ProductCard';
+import { bikeTypes } from '../data/bikes';
 
 export default function Products() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [priceFilter, setPriceFilter] = useState(3000);
-
-  const filtered = bikes.filter(bike => {
-    const bikePrice = parseInt(bike.price.replace('$', '').replace(',', ''));
-    const categoryMatch = selectedCategory === 'all' || bike.category === selectedCategory;
-    const priceMatch = bikePrice <= priceFilter;
-    return categoryMatch && priceMatch;
-  });
-
-  const categories = ['all', 'city', 'mountain', 'performance', 'budget'];
-
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold mb-8">🚴 All Bikes</h1>
+    <div className="min-h-screen bg-white pt-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-slate-900 mb-4">Our Fleet</h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Choose the bike that fits your riding style. All available now at ZUNO stations across the city.
+          </p>
+        </div>
 
-      <div className="flex gap-8">
-        {/* Sidebar Filters */}
-        <aside className="w-64 bg-slate-50 p-6 rounded-lg h-fit sticky top-24">
-          <h3 className="text-lg font-bold mb-4">Filters</h3>
-          
-          <div className="mb-6">
-            <h4 className="font-semibold mb-3 text-slate-900">Category</h4>
-            <div className="space-y-2">
-              {categories.map(cat => (
-                <label key={cat} className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="category"
-                    value={cat}
-                    checked={selectedCategory === cat}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="mr-2"
-                  />
-                  <span className="capitalize font-medium">{cat}</span>
-                </label>
-              ))}
+        {/* Info Box */}
+        <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-12">
+          <p className="text-gray-700 text-center">
+            🚴 <span className="font-bold">Not ready to buy?</span> No problem! ZUNO bikes are available for rent at affordable rates. 
+            <span className="font-bold text-blue-600"> Download the app</span> and find the nearest station to start riding!
+          </p>
+        </div>
+
+        {/* Bike Types Grid */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {bikeTypes.map((bike) => (
+            <BikeTypeCard key={bike.id} bike={bike} />
+          ))}
+        </div>
+
+        {/* Pricing Section */}
+        <div className="mt-20 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 rounded-2xl p-12 text-white text-center">
+          <h2 className="text-4xl font-bold mb-6">How Much Does It Cost?</h2>
+          <div className="grid md:grid-cols-4 gap-6 mb-8">
+            <div>
+              <p className="text-3xl font-bold text-blue-400">₹2/min</p>
+              <p className="text-gray-300">Pay per ride</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-cyan-400">₹99</p>
+              <p className="text-gray-300">Daily pass</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-blue-400">₹799</p>
+              <p className="text-gray-300">Monthly pass</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-cyan-400">₹6,999</p>
+              <p className="text-gray-300">Annual pass</p>
             </div>
           </div>
+          <button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition transform hover:scale-105">
+            📱 Download App & Ride
+          </button>
+        </div>
 
-          <div>
-            <h4 className="font-semibold mb-3 text-slate-900">Max Price</h4>
-            <input
-              type="range"
-              min="500"
-              max="3000"
-              value={priceFilter}
-              onChange={(e) => setPriceFilter(e.target.value)}
-              className="w-full"
-            />
-            <p className="text-blue-600 font-bold mt-2">${priceFilter}</p>
+        {/* FAQ Section */}
+        <div className="mt-20">
+          <h2 className="text-3xl font-bold text-center mb-12">Bike Questions?</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-slate-50 p-6 rounded-lg">
+              <p className="font-bold text-lg mb-2">🚲 Can I choose which bike?</p>
+              <p className="text-gray-700">
+                Yes! The ZUNO app shows all available bikes at nearby stations. Pick your favorite!
+              </p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded-lg">
+              <p className="font-bold text-lg mb-2">⚡ How are they maintained?</p>
+              <p className="text-gray-700">
+                ZUNO maintains all bikes. They're checked daily and ready to ride anytime.
+              </p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded-lg">
+              <p className="font-bold text-lg mb-2">🔋 How long do batteries last?</p>
+              <p className="text-gray-700">
+                All bikes have sufficient range for daily commutes (45-70 km). Auto-charge at stations.
+              </p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded-lg">
+              <p className="font-bold text-lg mb-2">🌍 Are they eco-friendly?</p>
+              <p className="text-gray-700">
+                100% electric. Zero emissions. Help reduce carbon footprint with every ride!
+              </p>
+            </div>
           </div>
-        </aside>
-
-        {/* Products Grid */}
-        <main className="flex-1">
-          <p className="text-gray-600 mb-6">Showing {filtered.length} bikes</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map(bike => (
-              <ProductCard key={bike.id} bike={bike} />
-            ))}
-          </div>
-        </main>
+        </div>
       </div>
     </div>
   );

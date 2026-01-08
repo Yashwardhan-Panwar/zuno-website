@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
-import { faqs } from '../data/faq';
-
-export default function FAQ() {
-  const [openId, setOpenId] = useState(null);
-
-  return (
-    <section className="py-24 bg-slate-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-5xl md:text-6xl font-bold text-center mb-4">FAQs</h2>
-        <p className="text-center text-gray-600 text-xl mb-16">Common questions answered</p>
-
-        <div className="space-y-4">
-          {faqs.map((faq) => (
-            <div key={faq.id} className="bg-white rounded-lg shadow hover:shadow-lg transition">
-              <button
-                onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
-                className="w-full p-6 text-left font-bold text-lg flex justify-between items-center hover:text-blue-600 transition"
-              >
-                {faq.question}
-                <span className={`text-2xl transition transform ${
-                  openId === faq.id ? 'rotate-45' : ''
-                }`}>
-                  +
-                </span>
-              </button>
-
-              {openId === faq.id && (
-                <div className="px-6 pb-6 text-gray-700 border-t border-gray-200 animate-slide-down">
-                  {faq.answer}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+export const faqs = [
+  {
+    id: 1,
+    question: "How do I start a ride in Jaipur?",
+    answer: "Download the ZUNO app, sign up with your phone number, locate a nearby ZUNO station in Jaipur, scan the QR code on the bike, and start riding!",
+  },
+  {
+    id: 2,
+    question: "How much does a ride cost?",
+    answer: "₹2 per minute. With subscriptions, you get discounted rates (from ₹1/min for monthly pass). Daily pass is ₹99/day.",
+  },
+  {
+    id: 3,
+    question: "Can I return the bike anywhere?",
+    answer: "No, bikes must be returned to any ZUNO station across Jaipur and parked in the designated dock. GPS helps you find the nearest station.",
+  },
+  {
+    id: 4,
+    question: "What if the bike breaks during a ride?",
+    answer: "Contact our 24/7 support immediately through the app. We'll arrange pickup and credit you for the inconvenience.",
+  },
+  {
+    id: 5,
+    question: "Do you have subscription plans?",
+    answer: "Yes! Daily (₹99), Monthly (₹799), and Annual (₹6,999) plans available. Monthly plan gives you ₹0.80/min rate.",
+  },
+  {
+    id: 6,
+    question: "Is the payment secure?",
+    answer: "Absolutely! We use encrypted payment gateways. Your wallet and payment information are 100% secure.",
+  },
+  {
+    id: 7,
+    question: "What's your service area?",
+    answer: "ZUNO is launching in Jaipur, Rajasthan! We have 8 major stations across Central, North, South, East, and Old City areas.",
+  },
+  {
+    id: 8,
+    question: "Can I report a damaged bike?",
+    answer: "Yes, report damaged bikes in the app. We maintain 99% uptime across all Jaipur stations. Don't worry, you won't be charged.",
+  },
+];
