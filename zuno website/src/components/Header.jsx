@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';  // ✅ Correct import
 
 export default function Header() {
   return (
@@ -11,12 +11,13 @@ export default function Header() {
         
         <nav className="flex gap-8">
           <Link to="/" className="hover:text-blue-400 transition">Home</Link>
-          <Link to="/products" className="hover:text-blue-400 transition">Products</Link>
+          <Link to="/products" className="hover:text-blue-400 transition">Our Fleet</Link>
+          <Link to="/map" className="hover:text-blue-400 transition">Find Bikes 🗺️</Link>
           <Link to="/" className="hover:text-blue-400 transition">About</Link>
         </nav>
 
         <button className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-lg font-semibold transition">
-          🛒 Cart
+          📱 Download App
         </button>
       </div>
     </header>

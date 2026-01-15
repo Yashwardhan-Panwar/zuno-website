@@ -1,23 +1,27 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import Map from './pages/Map';
 
-export default function App() {
+function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col bg-slate-50">
+    <Router>  {/* ✅ This wraps everything */}
+      <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1">
+        <main className="flex-grow pt-20">  {/* ✅ pt-20 for sticky header */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/map" element={<Map />} />
           </Routes>
         </main>
         <Footer />
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
+
+export default App;

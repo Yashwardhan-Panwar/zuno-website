@@ -1,3 +1,4 @@
+// Bike Types available in ZUNO fleet
 export const bikeTypes = [
   {
     id: 1,
@@ -10,7 +11,7 @@ export const bikeTypes = [
     battery: "36V, 10Ah",
     description: "Perfect for casual city rides and short commutes",
     features: ["Lightweight", "Eco-friendly", "Easy to ride"],
-    availability: "1,240 bikes available",
+    count: 1240,
   },
   {
     id: 2,
@@ -23,7 +24,7 @@ export const bikeTypes = [
     battery: "48V, 14Ah",
     description: "More power for longer distances and hillier terrain",
     features: ["Long range", "Faster speed", "Comfortable ride"],
-    availability: "850 bikes available",
+    count: 850,
   },
   {
     id: 3,
@@ -36,10 +37,11 @@ export const bikeTypes = [
     battery: "48V, 16Ah",
     description: "Built for adventure with off-road capability",
     features: ["Rugged design", "Best performance", "Terrain sensors"],
-    availability: "640 bikes available",
+    count: 640,
   },
 ];
 
+// ZUNO Stations in Jaipur
 export const stations = [
   {
     id: 1,
