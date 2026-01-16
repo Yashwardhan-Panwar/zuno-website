@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { liveBikes, getAvailableBikesCount } from '../data/mapBikes';
 import { stations } from '../data/bikes';
 
@@ -181,11 +182,15 @@ export default function Map() {
                   <span>Rides: <span className="font-semibold">{bike.rideCount}</span></span>
                 </div>
 
-                {/* Action Button */}
-                {bike.status === 'available' && (
-                  <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-lg transition">
-                    🚴 Reserve Now
-                  </button>
+              {/* Action Button */}
+              {bike.status === 'available' && (
+               <Link 
+                 to="/scan" 
+                 state={{ suggestedBike: bike }}
+                 className="w-full block text-center bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold py-2 rounded-lg transition"
+               >
+               🚴 Reserve & Unlock
+               </Link>
                 )}
                 {bike.status === 'in-use' && (
                   <button className="w-full bg-gray-300 text-gray-600 font-bold py-2 rounded-lg cursor-not-allowed" disabled>

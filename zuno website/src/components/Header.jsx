@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';  // ✅ Correct import
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -13,6 +13,7 @@ export default function Header() {
           <Link to="/" className="hover:text-blue-400 transition">Home</Link>
           <Link to="/products" className="hover:text-blue-400 transition">Our Fleet</Link>
           <Link to="/map" className="hover:text-blue-400 transition">Find Bikes 🗺️</Link>
+          <Link to="/scan" className="hover:text-blue-400 transition">Scan QR 📱</Link> {/* ✅ NEW */}
           <Link to="/" className="hover:text-blue-400 transition">About</Link>
         </nav>
 
