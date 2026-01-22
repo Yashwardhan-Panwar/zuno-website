@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { liveBikes, getAvailableBikesCount } from '../data/mapBikes';
 import { stations } from '../data/bikes';
+import LeafletMap from '../components/LeafletMap';
 
 export default function Map() {
   const [selectedBike, setSelectedBike] = useState(null);
@@ -97,21 +98,12 @@ export default function Map() {
           </div>
         </div>
 
-        {/* Map Placeholder */}
+        {/* ✅ REAL MAP */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-4">📍 Interactive Map (Coming Soon)</h2>
-          <div className="bg-gradient-to-br from-blue-100 to-cyan-100 rounded-lg h-96 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-6xl mb-4">🗺️</p>
-              <p className="text-gray-700 text-lg font-semibold">
-                Google Maps / Leaflet Integration
-              </p>
-              <p className="text-gray-600">
-                Will show all stations and bikes with real-time locations
-              </p>
-            </div>
-          </div>
+          <h2 className="text-2xl font-bold mb-4">📍 Live Station Map</h2>
+          <LeafletMap />
         </div>
+
 
         {/* Bikes Grid */}
         <div className="mb-8">

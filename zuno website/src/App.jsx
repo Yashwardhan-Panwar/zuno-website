@@ -7,6 +7,8 @@ import Products from './pages/Products';
 import Map from './pages/Map';
 import Scan from './pages/Scan';           // ✅ NEW
 import RideActive from './pages/RideActive'; // ✅ NEW
+import RideSummary from './pages/RideSummary';
+import Wallet from './pages/Wallet';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="/map" element={<Map />} />
             <Route path="/scan" element={<Scan />} />           {/* ✅ NEW */}
             <Route path="/ride-active" element={<RideActive />} /> {/* ✅ NEW */}
+            <Route path="/ride-summary" element={<RideSummary />} />
+            <Route path="/wallet" element={<Wallet />} />
           </Routes>
         </main>
         <Footer />

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 export default function Hero() {
   return (
     <section className="relative bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden pt-24 pb-32">
@@ -24,9 +24,12 @@ export default function Hero() {
             <button className="bg-blue-500 hover:bg-blue-600 px-8 py-4 rounded-lg font-bold text-lg transition transform hover:scale-105">
               📱 Download App
             </button>
-            <button className="border-2 border-blue-400 text-blue-400 px-8 py-4 rounded-lg font-bold hover:bg-blue-400 hover:text-slate-900 transition">
-              🗺️ Find Stations
-            </button>
+            <Link
+             to="/map"
+             className="border-2 border-blue-400 text-blue-400 px-8 py-4 rounded-lg font-bold hover:bg-blue-400 hover:text-slate-900 transition inline-block"
+          >
+             🗺️ Find Stations
+            </Link>
           </div>
 
           {/* Trust badges */}
