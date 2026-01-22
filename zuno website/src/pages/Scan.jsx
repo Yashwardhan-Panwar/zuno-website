@@ -56,9 +56,14 @@ export default function Scan() {
     setTimeout(() => {
       setUnlocking(false);
       navigate('/ride-active', { 
-        state: { bike, startTime: new Date().toISOString() } 
+        state: { 
+         bike, 
+         startTime: new Date().toISOString(),
+         startStation: bike.location.station  // ✅ Pass pickup station
+        } 
       });
     }, 3000);
+
   };
 
   const testCodes = ['ZUNO001', 'ZUNO002', 'ZUNO010', 'ZUNO015'];

@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom'; // ✅ Add Link import
+import { useLocation, useNavigate } from 'react-router-dom';
+import { stations } from '../data/stations';
 
 export default function RideActive() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { bike, startTime } = location.state || {};
+  const { bike, startTime, startStation } = location.state || {};
 
   const [rideTime, setRideTime] = useState(0);
   const [distance, setDistance] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [fare, setFare] = useState(0);
   const [showEndModal, setShowEndModal] = useState(false);
+  const [selectedDropStation, setSelectedDropStation] = useState('');
+
+  // Get pickup station (from bike location or passed state)
+  const pickupStation = startStation || bike?.location?.station || "City Center Station";
 
   useEffect(() => {
     if (!bike) {
@@ -24,12 +29,14 @@ export default function RideActive() {
       const distanceIncrement = (Math.random() * 0.2 + 0.2) / 60;
       setDistance(prev => parseFloat((prev + distanceIncrement).toFixed(2)));
       setSpeed(Math.floor(Math.random() * 15 + 15));
-      const minutes = Math.floor((Date.now() - new Date(startTime)) / 60000);
-      setFare(minutes * 2);
+      
+      // ✅ REAL-TIME FARE: Calculate based on actual elapsed time
+      const elapsedMinutes = Math.ceil(rideTime / 60);
+      setFare(elapsedMinutes * 2); // ₹2/min
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [startTime]);
+  }, [rideTime]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -38,18 +45,29 @@ export default function RideActive() {
   };
 
   const handleEndRide = () => {
+    if (!selectedDropStation) {
+      alert('⚠️ Please select a drop station!');
+      return;
+    }
     setShowEndModal(true);
   };
 
   const confirmEndRide = () => {
+    // ✅ Calculate final values
+    const finalMinutes = Math.ceil(rideTime / 60);
+    const finalFare = finalMinutes * 2;
+
     navigate('/ride-summary', {
       state: {
         bike,
         duration: rideTime,
-        distance,
-        fare,
+        durationMins: finalMinutes,
+        distance: distance.toFixed(2),
+        fare: finalFare,
         startTime,
-        endTime: new Date().toISOString()
+        endTime: new Date().toISOString(),
+        startStation: pickupStation,
+        endStation: selectedDropStation
       }
     });
   };
@@ -58,7 +76,7 @@ export default function RideActive() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-400 via-teal-500 to-blue-500 pt-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8"> {/* ✅ MAIN CONTAINER */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-2xl p-6 mb-6">
@@ -67,6 +85,9 @@ export default function RideActive() {
               <h1 className="text-3xl font-bold text-gray-900 mb-2">🚴 Ride in Progress</h1>
               <p className="text-gray-600">
                 {bike.emoji} {bike.type} • {bike.id}
+              </p>
+              <p className="text-sm text-blue-600 font-semibold mt-1">
+                📍 From: {pickupStation}
               </p>
             </div>
             <div className="text-center">
@@ -80,7 +101,7 @@ export default function RideActive() {
         <div className="grid md:grid-cols-3 gap-6 mb-6">
           <div className="bg-white rounded-xl shadow-lg p-6 text-center">
             <div className="text-5xl mb-2">📍</div>
-            <div className="text-3xl font-bold text-blue-600">{distance} km</div>
+            <div className="text-3xl font-bold text-blue-600">{distance.toFixed(2)} km</div>
             <p className="text-gray-600 font-semibold">Distance</p>
           </div>
           <div className="bg-white rounded-xl shadow-lg p-6 text-center">
@@ -92,6 +113,7 @@ export default function RideActive() {
             <div className="text-5xl mb-2">💰</div>
             <div className="text-3xl font-bold text-green-600">₹{fare}</div>
             <p className="text-gray-600 font-semibold">Current Fare</p>
+            <p className="text-xs text-gray-500 mt-1">₹2/min</p>
           </div>
         </div>
 
@@ -140,20 +162,41 @@ export default function RideActive() {
           </div>
         </div>
 
-        {/* ✅ FIXED: End Ride Button IN CONTAINER */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-6"> {/* ✅ WRAPPER */}
+        {/* ✅ NEW: Drop Station Selector */}
+        <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
+          <h3 className="text-xl font-bold mb-4">🏁 Select Drop Station</h3>
+          <select
+            value={selectedDropStation}
+            onChange={(e) => setSelectedDropStation(e.target.value)}
+            className="w-full border-2 border-blue-200 rounded-xl px-4 py-3 text-lg focus:ring-4 focus:ring-blue-300 focus:border-blue-500"
+          >
+            <option value="">-- Choose where to park --</option>
+            {stations.map(station => (
+              <option key={station.id} value={station.name}>
+                {station.name} ({station.area})
+              </option>
+            ))}
+          </select>
+          <p className="text-sm text-gray-500 mt-2">
+            💡 Park at any ZUNO station to complete your ride
+          </p>
+        </div>
+
+        {/* End Ride Button */}
+        <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
           <button
             onClick={handleEndRide}
-            className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-xl"
+            disabled={!selectedDropStation}
+            className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            🛑 End Ride
+            {selectedDropStation ? '🛑 End Ride' : '⚠️ Select Drop Station First'}
           </button>
         </div>
 
         {/* Safety Info */}
         <div className="bg-yellow-50 border-2 border-yellow-300 rounded-xl p-4 mb-6">
           <p className="text-yellow-800 text-center font-semibold">
-            ⚠️ Remember to park at a ZUNO station when ending your ride
+            ⚠️ You selected: {selectedDropStation || 'No station selected'}
           </p>
         </div>
 
@@ -162,17 +205,27 @@ export default function RideActive() {
           <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl p-8 max-w-md w-full">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">🔒 End Ride?</h2>
-              <p className="text-gray-600 text-center mb-6">Are you parked at a ZUNO station?</p>
+              <p className="text-gray-600 text-center mb-6">
+                Park at <span className="font-bold text-blue-600">{selectedDropStation}</span>
+              </p>
               <div className="bg-gray-50 rounded-lg p-4 mb-6">
                 <div className="flex justify-between mb-2">
                   <span className="text-gray-700">Duration:</span>
-                  <span className="font-bold">{formatTime(rideTime)}</span>
+                  <span className="font-bold">{formatTime(rideTime)} ({Math.ceil(rideTime / 60)} mins)</span>
                 </div>
                 <div className="flex justify-between mb-2">
                   <span className="text-gray-700">Distance:</span>
-                  <span className="font-bold">{distance} km</span>
+                  <span className="font-bold">{distance.toFixed(2)} km</span>
                 </div>
-                <div className="flex justify-between text-lg">
+                <div className="flex justify-between mb-2">
+                  <span className="text-gray-700">From:</span>
+                  <span className="font-bold text-sm">{pickupStation}</span>
+                </div>
+                <div className="flex justify-between mb-2">
+                  <span className="text-gray-700">To:</span>
+                  <span className="font-bold text-sm">{selectedDropStation}</span>
+                </div>
+                <div className="flex justify-between text-lg border-t pt-2 mt-2">
                   <span className="text-gray-700">Total Fare:</span>
                   <span className="font-bold text-green-600">₹{fare}</span>
                 </div>
@@ -194,7 +247,7 @@ export default function RideActive() {
             </div>
           </div>
         )}
-      </div> {/* ✅ END MAIN CONTAINER */}
+      </div>
     </div>
   );
 }

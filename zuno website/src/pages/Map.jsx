@@ -174,29 +174,33 @@ export default function Map() {
                   <span>Rides: <span className="font-semibold">{bike.rideCount}</span></span>
                 </div>
 
-              {/* Action Button */}
-              {bike.status === 'available' && (
+             {/* Action Button */}
+             {bike.status === 'available' && (
                <Link 
-                 to="/scan" 
-                 state={{ suggestedBike: bike }}
-                 className="w-full block text-center bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold py-2 rounded-lg transition"
+                  to="/scan" 
+                  state={{ 
+                   suggestedBike: bike,
+                   startStation: bike.location.station  // ✅ Pass pickup station
+                 }}
+                  className="w-full block text-center bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold py-2 rounded-lg transition"
                >
-               🚴 Reserve & Unlock
+                 🚴 Reserve & Unlock
                </Link>
-                )}
-                {bike.status === 'in-use' && (
-                  <button className="w-full bg-gray-300 text-gray-600 font-bold py-2 rounded-lg cursor-not-allowed" disabled>
-                    Currently In Use
-                  </button>
-                )}
-                {bike.status === 'low-battery' && (
-                  <button className="w-full bg-red-100 text-red-600 font-bold py-2 rounded-lg cursor-not-allowed" disabled>
-                    ⚠️ Low Battery - Charging
-                  </button>
-                )}
+             )}
+             {bike.status === 'in-use' && (
+               <button className="w-full bg-gray-300 text-gray-600 font-bold py-2 rounded-lg cursor-not-allowed" disabled>
+                 Currently In Use
+               </button>
+             )}
+             {bike.status === 'low-battery' && (
+               <button className="w-full bg-red-100 text-red-600 font-bold py-2 rounded-lg cursor-not-allowed" disabled>
+                 ⚠️ Low Battery - Charging
+               </button>
+             )}
+
               </div>
             ))}
-          </div>
+          </div> 
         </div>
 
         {/* Selected Bike Modal */}
