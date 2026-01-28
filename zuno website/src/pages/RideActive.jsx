@@ -75,7 +75,7 @@ export default function RideActive() {
   if (!bike) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-400 via-teal-500 to-blue-500 pt-20">
+      <div className="min-h-screen pt-20" style={{ background: 'linear-gradient(135deg, #E6F7F6, #1CBBB4)' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Header */}
@@ -187,7 +187,8 @@ export default function RideActive() {
           <button
             onClick={handleEndRide}
             disabled={!selectedDropStation}
-            className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full text-white py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ background: 'linear-gradient(135deg, #EF4444, #DC2626)' }}
           >
             {selectedDropStation ? '🛑 End Ride' : '⚠️ Select Drop Station First'}
           </button>
@@ -237,12 +238,12 @@ export default function RideActive() {
                 >
                   Cancel
                 </button>
-                <button
-                  onClick={confirmEndRide}
-                  className="flex-1 bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-bold py-3 rounded-lg transition"
-                >
-                  Confirm & Lock
-                </button>
+              <button
+                 onClick={confirmEndRide}
+                 className="flex-1 text-white font-bold py-3 rounded-lg transition" style={{ background: 'linear-gradient(135deg, #1CBBB4, #14A79D)' }}
+              > 
+               Confirm & Lock
+              </button>
               </div>
             </div>
           </div>

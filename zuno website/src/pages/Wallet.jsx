@@ -27,15 +27,19 @@ export default function Wallet() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-pink-50 pt-20 pb-12">
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-          💳 Wallet
+        <h1 className="text-5xl font-bold mb-4" style={{ 
+           background: 'linear-gradient(135deg, #1CBBB4, #14A79D)',
+           WebkitBackgroundClip: 'text',
+           WebkitTextFillColor: 'transparent'
+         }}>
+           💳 Wallet
         </h1>
         <p className="text-xl text-gray-600">Manage your ride balance</p>
       </div>
 
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Balance Card */}
-        <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-3xl p-8 shadow-2xl">
+        <div className="text-white rounded-3xl p-8 shadow-2xl" style={{ background: 'linear-gradient(135deg, #1CBBB4, #14A79D)' }}>
           <div className="text-center">
             <div className="text-6xl font-bold mb-2">₹{balance.toFixed(2)}</div>
             <p className="text-indigo-100 text-lg">Available Balance</p>
@@ -79,17 +83,19 @@ export default function Wallet() {
       {/* Bottom Actions */}
       <div className="max-w-md mx-auto mt-12 flex gap-4 justify-center">
         <Link
-          to="/ride-summary"
-          className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-4 px-6 rounded-2xl font-bold text-center transition transform hover:scale-105 shadow-xl"
-        >
-          📋 View Ride History
-        </Link>
-        <Link
-          to="/map"
-          className="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-4 px-6 rounded-2xl font-bold text-center transition transform hover:scale-105 shadow-xl"
-        >
-          🚴 Find Bikes
-        </Link>
+           to="/ride-summary"
+           className="flex-1 text-white py-4 px-6 rounded-2xl font-bold text-center transition transform hover:scale-105 shadow-xl" 
+           style={{ background: 'linear-gradient(135deg, #10B981, #059669)' }}
+           >
+            📋 View Ride History
+            </Link>
+            <Link
+            to="/map"
+            className="flex-1 text-white py-4 px-6 rounded-2xl font-bold text-center transition transform hover:scale-105 shadow-xl"
+            style={{ background: 'linear-gradient(135deg, #1CBBB4, #14A79D)' }}
+            >
+              🚴 Find Bikes
+              </Link>
       </div>
     </div>
   );
