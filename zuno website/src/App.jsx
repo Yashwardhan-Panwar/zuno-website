@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,9 +11,19 @@ import Scan from './pages/Scan';
 import RideActive from './pages/RideActive';
 import RideSummary from './pages/RideSummary';
 import Wallet from './pages/Wallet';
-import About from './pages/About'; // ✅ NEW
+import About from './pages/About';
 
 function App() {
+    const fetchAPI = async () => {
+    const response = await axios.get('http://localhost:5000/api');
+    console.log(response.data.status);
+  };
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
+
+  
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
